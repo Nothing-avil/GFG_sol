@@ -23,5 +23,3 @@ int find(int i , int arr[],int target,vector<vector<int>>&dp){
        vector<vector<int>>dp(n,vector<int>(sum/2+1,-1));
       return find(n-1,arr,sum/2,dp);
     }
-    
-};
