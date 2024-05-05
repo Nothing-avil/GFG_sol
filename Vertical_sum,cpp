@@ -1,0 +1,27 @@
+Node is as follows:
+struct Node{
+int data;
+Node *left,*right;
+};
+*/
+class Solution{
+  public:
+        map<int, int> mp;
+        
+        void solve(Node* root, int dis){
+            if(root==NULL){
+                return;
+            }
+            mp[dis]+= root->data;
+            solve(root->left, dis-1);
+            solve(root->right, dis+1);
+        }
+    vector <int> verticalSum(Node *root) {
+        vector<int> res;
+        solve(root, 0);
+        for(auto i: mp){
+            res.push_back(i.second);
+        }
+        return res;
+    }
+};
