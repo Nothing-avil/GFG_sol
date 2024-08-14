@@ -1,5 +1,6 @@
 class Solution {
   public:
+
     int longestCommonSubstr(string str1, string str2) {
         int n= str1.size(), m=str2.size(), ans=0;
         vector<vector<int>>dp(n+1, vector<int>(m+1, 0));
