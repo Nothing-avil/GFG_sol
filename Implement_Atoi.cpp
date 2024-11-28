@@ -33,3 +33,28 @@ class Solution{
         return int(dig);
     }
 };
+
+// Another 
+
+class Solution {
+  public:
+    int myAtoi(char *s) {
+        int i=0;
+        while(s[i] == ' ' && s[i] == '\0'){
+            i++;
+        }
+        int position = 1;
+        if(s[i] == '-' || s[i] == '+'){
+            position = 1 - 2*(s[i] == '-');
+            i++;    
+        }
+        int value = 0;
+        while(s[i] >= '0' && s[i] <= '9' && s[i] != '\0'){
+            if(value > INT_MAX/10 || (value == INT_MAX/10 && s[i] > '7')){
+                return (position == -1) ? INT_MIN : INT_MAX;
+            }
+            value = value*10 + (s[i++] - '0');
+        }
+        return value*position;
+    }
+};
