@@ -11,8 +11,8 @@ class Solution {
             else{
                 temp++;   
             }
-            if(temp <= 0 && mp.count(temp)){
-                mp[answer] = i;
+            if(temp <= 0 && !mp.count(temp)){
+                mp[temp] = i;
             }
             if(temp <= 0 && mp.count(temp - 1)){
                 answer = max(answer, i - mp[temp - 1]);
