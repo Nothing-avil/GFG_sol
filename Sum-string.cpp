@@ -37,7 +37,6 @@ public:
 
     int isSumString(string str) {
         int n = str.size();
-        // 0-i, i+1 - j
         for(int i = 0; i < n; i++) {
             for(int j = i+1; j < n-1; j++) {
                 string first = str.substr(0, i+1);
