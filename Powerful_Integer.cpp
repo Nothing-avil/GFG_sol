@@ -1,7 +1,7 @@
 class Solution {
   public:
     int powerfulInteger(vector<vector<int>>& intervals, int k) {
-        unordered_map<int, pair<int, int>> mp;
+        map<int, pair<int, int>> mp;
         for(auto it: intervals){
             mp[it[0]].first++;
             mp[it[1]].second--;
