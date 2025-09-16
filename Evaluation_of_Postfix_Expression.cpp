@@ -1,41 +1,36 @@
 class Solution {
   public:
-    int evaluate(vector<string>& arr) {
-        stack<int> st;
-        for(string s : arr){
-            int a, b, ans = 0;
-            if(s =="+"){
-                a = st.top();
-                st.pop();
-                b = st.top();
-                st.pop();
-                ans = a + b;
-                st.push(ans);
-            }else if(s == "-"){
-                a = st.top();
-                st.pop();
-                b = st.top();
-                st.pop();
-                ans = b - a;
-                st.push(ans);
-            }else if(s == "*"){
-                a = st.top();
-                st.pop();
-                b = st.top();
-                st.pop();
-                ans = a * b;
-                st.push(ans);
-            }else if(s == "/"){
-                a = st.top();
-                st.pop();
-                b = st.top();
-                st.pop();
-                ans = b / a;
-                st.push(ans);
-            }else{
-                st.push(stoi(s));
+     int evaluatePostfix(vector<string>& arr) {
+        stack<long long> st;
+
+        for (string &s : arr) {
+            if (isOperator(s)) {
+                long long b = st.top(); st.pop();
+                long long a = st.top(); st.pop();
+                long long res = applyOp(a, b, s);
+                st.push(res);
+            } else {
+                st.push(stoll(s));
             }
         }
-        return st.top();
+        return (int)st.top();
+    }
+
+  private:
+    bool isOperator(const string &s) {
+        return (s == "+" || s == "-" || s == "*" || s == "/" || s == "^");
+    }
+
+    long long applyOp(long long a, long long b, const string &op) {
+        if (op == "+") return a + b;
+        if (op == "-") return a - b;
+        if (op == "*") return a * b;
+        if (op == "/") {
+            long long res = a / b;
+            if ((a ^ b) < 0 && a % b != 0) res--;
+            return res;
+        }
+        if (op == "^") return pow(a, b);
+        return 0;
     }
 };
