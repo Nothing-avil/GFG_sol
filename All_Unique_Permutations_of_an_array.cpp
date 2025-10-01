@@ -6,8 +6,6 @@ class Solution {
         do{
             store.push_back(arr);
         }while(next_permutation(arr.begin(),arr.end()));
-        
-        
         return store;
     }
 };
