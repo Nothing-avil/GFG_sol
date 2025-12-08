@@ -1,31 +1,36 @@
-class Solution{
-public:
-    pair<int,string> dp[27][27];
-    string matrixChainOrder(int p[], int n){
-        return f(1,n-1,p).second;
+class Solution {
+    
+private:
+    string build(int i, int j, vector<vector<int>> &split) {
+        if (i == j) return string(1, 'A' + i);
+        int k = split[i][j];
+        return "(" + build(i, k, split) + build(k + 1, j, split) + ")";
     }
     
-    pair<int,string> f(int i,int j,int p[]){
-        if(i==j){
-            string curr = "";
-            curr += 'A' + i-1; 
-            return {0,curr};
-        }
+public:
+    string matrixChainOrder(vector<int> &arr) {
+        int n = arr.size();
+        int m = n - 1; // number of matrices
         
-        if(dp[i][j].second != "") return dp[i][j];
+        vector<vector<long long>> dp(m, vector<long long>(m, 0));
+        vector<vector<int>> split(m, vector<int>(m, -1));
         
-        int val = INT_MAX;
-        string s = "";
-        
-        for(int k=i;k<j;k++){
-            pair<int,string> a =  f(i,k,p);
-            pair<int,string> b =  f(k+1,j,p);
-            int q = p[i-1]*p[j]*p[k] + a.first + b.first;
-            if(q<val){
-                val = q;
-                s = "(" + a.second + b.second + ")";
+        // gap strategy
+        for (int len = 2; len <= m; len++) {
+            for (int i = 0; i + len - 1 < m; i++) {
+                int j = i + len - 1;
+                dp[i][j] = LLONG_MAX;
+                
+                for (int k = i; k < j; k++) {
+                    long long cost = dp[i][k] + dp[k+1][j] + 1LL * arr[i] * arr[k+1] * arr[j+1];
+                    if (cost < dp[i][j]) {
+                        dp[i][j] = cost;
+                        split[i][j] = k;
+                    }
+                }
             }
         }
-        return dp[i][j] = {val,s};
+        
+        return build(0, m - 1, split);
     }
 };
