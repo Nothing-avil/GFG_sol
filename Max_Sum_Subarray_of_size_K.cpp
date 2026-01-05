@@ -1,6 +1,7 @@
 class Solution{   
 public:
-    long maximumSumSubarray(int k, vector<int> &arr , int N){
+    long maximumSumSubarray(int k, vector<int> &arr){
+        int n = arr.size();
         long maxs=0, res=0;
         for(int i=0;i<k; i++){
             maxs+= arr[i];
