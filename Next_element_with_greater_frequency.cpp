@@ -5,7 +5,7 @@ class Solution {
       
          map<int , int >mp;
          stack<int>st;
-         for(it :arr){
+         for(int it :arr){
              mp[it]++;
          }
          vector<int>ans(n,-1);
