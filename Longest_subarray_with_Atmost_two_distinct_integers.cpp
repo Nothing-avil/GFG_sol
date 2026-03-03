@@ -14,7 +14,7 @@ class Solution {
                 }
                 i++;
             }
-            answer = max(answer, j-i+1);
+            answer = max(answer, j - i + 1);
         }
         return answer;
     }
